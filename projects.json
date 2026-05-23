@@ -23,6 +23,16 @@
 
   "maker": [
     {
+      "title": "Web Lighting Controller",
+      "tag": "Raspberry Pi · Bluetooth · Flask · Vanilla JS",
+      "description": "Smart kitchen lighting controller running on a Raspberry Pi Zero W. Controls 6 SP110E Bluetooth LED strips across 2 sides × 3 zones — RGB color accent lights, tunable-white under-cabinet, and toe-kick strips. Any phone on the home WiFi gets the full web UI with a live kitchen canvas visualizer. The public demo runs without any hardware.",
+      "folder": "images",
+      "cover": "webLightControl01.png",
+      "gallery": [],
+      "demo_link": "https://idpd.us/Web_Lighting_Controller/sp110e-controller/templates/index.html",
+      "video_coming_soon": true
+    },
+    {
       "title": "3rd Gen 4Runner Corner Lights",
       "tag": "Electronics · Fabrication",
       "description": "Custom front turning/clearance lights across multiple client-spec iterations. 3D design, plastic fabrication, 3D-printed mold tooling for casting refraction lenses, PCB design, and microcontroller programming.",
