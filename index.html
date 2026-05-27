@@ -1170,15 +1170,19 @@
 
     // PROJECT GALLERY — two-level: grid → detail (desc + thumbs) → lightbox
     var _pgStore = {}, _pgCurrentId = null, _pgCurrentImages = [];
+    var _pgHashIndex = {};
+    function slugify(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
 
-    function openPG(id) {
+    function openPG(id, noHash) {
       _pgCurrentId = id;
-      showPGGrid();
+      showPGGrid(true);
       document.getElementById('pg-overlay').classList.add('open');
+      if (!noHash && _pgStore[id] && _pgStore[id]._hash) history.pushState(null, '', '#' + _pgStore[id]._hash);
     }
 
-    function showPGGrid() {
+    function showPGGrid(skipHash) {
       var data = _pgStore[_pgCurrentId];
+      if (!skipHash && data._hash) history.pushState(null, '', '#' + data._hash);
       document.getElementById('pg-title').textContent = data.title;
       document.getElementById('pg-back').style.display = 'none';
       var grid = document.getElementById('pg-grid');
@@ -1195,9 +1199,13 @@
       document.getElementById('pg-detail-view').style.display = 'none';
     }
 
-    function openPGDetail(index) {
+    function openPGDetail(index, noHash) {
       var proj = _pgStore[_pgCurrentId].projects[index];
       var folder = proj.folder || '';
+      if (!noHash) {
+        var parentHash = _pgStore[_pgCurrentId]._hash;
+        if (parentHash && proj._slug) history.pushState(null, '', '#' + parentHash + '/' + proj._slug);
+      }
 
       document.getElementById('pg-title').textContent = proj.title || '';
       document.getElementById('pg-detail-tag').textContent = proj.tag || '';
@@ -1230,6 +1238,7 @@
 
     function closePG() {
       document.getElementById('pg-overlay').classList.remove('open');
+      history.pushState(null, '', window.location.pathname + window.location.search);
     }
 
     document.getElementById('pg-overlay').addEventListener('click', function(e) {
@@ -1260,10 +1269,18 @@
       return path.indexOf('/') !== -1 ? path : (folder ? folder + '/' + path : path);
     }
 
-    function buildCard(project) {
+    function buildCard(project, section) {
       if (project.type === 'project-gallery') {
         var pgId = 'pg_' + Math.random().toString(36).substr(2, 8);
         _pgStore[pgId] = project;
+        var pgSlug = slugify(project.title);
+        var pgHash = (section ? section + '/' : '') + pgSlug;
+        _pgStore[pgId]._hash = pgHash;
+        _pgHashIndex[pgHash] = [pgId, -1];
+        (project.projects || []).forEach(function(sub, i) {
+          sub._slug = slugify(sub.title);
+          _pgHashIndex[pgHash + '/' + sub._slug] = [pgId, i];
+        });
         var folder = project.folder || '';
         var src = project.cover ? imgSrc(project.cover, folder) : '';
         return '<div class="card" style="cursor:pointer" onclick="openPG(\'' + pgId + '\')">' +
@@ -1519,9 +1536,33 @@
       ['fun', 'casino', 'maker', 'designs'].forEach(function(section) {
         var grid = document.getElementById('grid-' + section);
         if (!grid || !data[section]) return;
-        grid.innerHTML = data[section].map(buildCard).join('');
+        grid.innerHTML = data[section].map(function(p) { return buildCard(p, section); }).join('');
       });
+      handleHashOnLoad();
     }
+
+    function handleHashOnLoad() {
+      var hash = window.location.hash.replace(/^#/, '');
+      if (!hash) return;
+      var entry = _pgHashIndex[hash];
+      if (!entry) return;
+      var pgId = entry[0], subIndex = entry[1];
+      openPG(pgId, true);
+      if (subIndex >= 0) openPGDetail(subIndex, true);
+    }
+
+    window.addEventListener('popstate', function() {
+      var hash = window.location.hash.replace(/^#/, '');
+      var entry = _pgHashIndex[hash];
+      if (entry) {
+        var pgId = entry[0], subIndex = entry[1];
+        openPG(pgId, true);
+        if (subIndex >= 0) openPGDetail(subIndex, true);
+        else showPGGrid(true);
+      } else {
+        document.getElementById('pg-overlay').classList.remove('open');
+      }
+    });
 
     fetch('projects.json')
       .then(function(r) { return r.json(); })
