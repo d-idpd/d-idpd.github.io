@@ -424,6 +424,38 @@
       cursor: default;
       letter-spacing: 0.03em;
     }
+    .card-store-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.75rem;
+      margin-right: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: 0.3rem 0.85rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .card-store-link:hover { background: var(--accent2); color: #000; }
+    .pg-buy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: 0.4rem 1.1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .pg-buy-btn:hover { background: var(--accent2); color: #000; }
     .gallery-item figcaption {
       font-size: 0.68rem;
       color: var(--muted);
@@ -816,6 +848,7 @@
         <p class="pg-detail-tag" id="pg-detail-tag"></p>
         <p class="pg-detail-desc" id="pg-detail-desc"></p>
         <div class="pg-thumbs" id="pg-thumbs"></div>
+        <div id="pg-buy-link"></div>
       </div>
     </div>
   </div>
@@ -1224,6 +1257,10 @@
         '</div>';
       }).join('');
 
+      var buyEl = document.getElementById('pg-buy-link');
+      if (buyEl) buyEl.innerHTML = proj.buy_link
+        ? '<a href="' + proj.buy_link + '" target="_blank" rel="noopener" class="pg-buy-btn">&#x1F6D2; Purchase</a>'
+        : '';
       document.getElementById('pg-grid-view').style.display = 'none';
       document.getElementById('pg-detail-view').style.display = 'block';
       document.getElementById('pg-modal').scrollTop = 0;
@@ -1283,12 +1320,16 @@
         });
         var folder = project.folder || '';
         var src = project.cover ? imgSrc(project.cover, folder) : '';
+        var pgStoreHtml = project.store_link
+          ? '<a href="' + project.store_link + '" target="_blank" rel="noopener" class="card-store-link" onclick="event.stopPropagation()">&#x1F6D2; Go to Store</a>'
+          : '';
         return '<div class="card" style="cursor:pointer" onclick="openPG(\'' + pgId + '\')">' +
           (src ? '<img class="card-img" src="' + src + '" alt="' + project.title + '" />' : '') +
           '<div class="card-body">' +
             '<p class="card-tag">' + (project.tag || '') + '</p>' +
             '<h3>' + project.title + '</h3>' +
             '<p>' + (project.description || '') + '</p>' +
+            pgStoreHtml +
             '<span class="card-gallery-hint">&#9654; View Projects</span>' +
           '</div>' +
         '</div>';
@@ -1340,6 +1381,10 @@
         ? '<a href="' + project.demo_link + '" target="_blank" rel="noopener" class="card-demo-link">&#9654; Try it</a>'
         : '';
 
+      var storeHtml = project.store_link
+        ? '<a href="' + project.store_link + '" target="_blank" rel="noopener" class="card-store-link">&#x1F6D2; Go to Store</a>'
+        : '';
+
       var videoComingSoonHtml = project.video_coming_soon
         ? '<span class="card-video-coming-soon">&#9654; See in action — coming soon</span>'
         : '';
@@ -1353,6 +1398,7 @@
           awardsHtml +
           videoHtml +
           demoHtml +
+          storeHtml +
           videoComingSoonHtml +
         '</div>' +
         galleryHtml +
@@ -1392,6 +1438,13 @@
           "gallery": [],
           "demo_link": "https://idpd.us/Web_Lighting_Controller/sp110e-controller/templates/index.html",
           "video_coming_soon": true
+        },
+        {
+          "title": "Two-Player Arcade Games",
+          "tag": "Browser · Vanilla JS · RetroPie",
+          "description": "A growing collection of two-player browser games — no frameworks, no server needed. Currently live: 2048 Two-Player with AI demo mode, split-screen gameplay, gamepad support, and background music. More games coming.",
+          "gallery": [],
+          "demo_link": "https://idpd.us/arcade-games/"
         },
         {
           "title": "3rd Gen 4Runner Corner Lights",
@@ -1462,6 +1515,37 @@
         }
       ],
       "fun": [
+        {
+          "title": "Resin Casting",
+          "tag": "Crafts · Resin · Keychains",
+          "description": "Resin casting projects — from decorative figures to wearable keychains.",
+          "type": "project-gallery",
+          "store_link": "http://idpd.us/iLemeMade/",
+          "folder": "images/fun/resin",
+          "cover": "resincat.png",
+          "projects": [
+            {
+              "title": "Kitty Resin Figure",
+              "tag": "Resin · Decorative",
+              "description": "Hello Kitty cast in pink resin — translucent with a glitter swirl finish.",
+              "folder": "images/fun/resin",
+              "cover": "resincat.png",
+              "gallery": [],
+              "buy_link": "https://idpd.us/iLemeMade/kitty/"
+            },
+            {
+              "title": "GummyBearCat Keychain",
+              "tag": "Resin · Keychain",
+              "description": "Gummy bear cat cast in hot-pink resin with a keychain ring — wearable and ready to go.",
+              "folder": "images/fun/resin",
+              "cover": "GummyBearCatWithChain.png",
+              "gallery": [
+                { "file": "GummyBearCatWithChain.png", "caption": "Finished keychain" }
+              ],
+              "buy_link": "https://idpd.us/iLemeMade/gummycat/"
+            }
+          ]
+        },
         {
           "title": "RC Cars",
           "tag": "Hobby · Electronics · Fabrication",

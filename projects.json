@@ -34,6 +34,13 @@
       "cover_contain": true
     },
     {
+      "title": "Two-Player Arcade Games",
+      "tag": "Browser · Vanilla JS · RetroPie",
+      "description": "A growing collection of two-player browser games — no frameworks, no server needed. Currently live: 2048 Two-Player with AI demo mode, split-screen gameplay, gamepad support, and background music. More games coming.",
+      "gallery": [],
+      "demo_link": "https://idpd.us/arcade-games/"
+    },
+    {
       "title": "3rd Gen 4Runner Corner Lights",
       "tag": "Electronics · Fabrication",
       "description": "Custom front turning/clearance lights across multiple client-spec iterations. 3D design, plastic fabrication, 3D-printed mold tooling for casting refraction lenses, PCB design, and microcontroller programming.",
@@ -104,6 +111,37 @@
   ],
 
   "fun": [
+    {
+      "title": "Resin Casting",
+      "tag": "Crafts · Resin · Keychains",
+      "description": "Resin casting projects — from decorative figures to wearable keychains.",
+      "type": "project-gallery",
+      "store_link": "http://idpd.us/iLemeMade/",
+      "folder": "images/fun/resin",
+      "cover": "resincat.png",
+      "projects": [
+        {
+          "title": "Kitty Resin Figure",
+          "tag": "Resin · Decorative",
+          "description": "Hello Kitty cast in pink resin — translucent with a glitter swirl finish.",
+          "folder": "images/fun/resin",
+          "cover": "resincat.png",
+          "gallery": [],
+          "buy_link": "https://idpd.us/iLemeMade/kitty/"
+        },
+        {
+          "title": "GummyBearCat Keychain",
+          "tag": "Resin · Keychain",
+          "description": "Gummy bear cat cast in hot-pink resin with a keychain ring — wearable and ready to go.",
+          "folder": "images/fun/resin",
+          "cover": "GummyBearCatWithChain.png",
+          "gallery": [
+            { "file": "GummyBearCatWithChain.png", "caption": "Finished keychain" }
+          ],
+          "buy_link": "https://idpd.us/iLemeMade/gummycat/"
+        }
+      ]
+    },
     {
       "title": "RC Cars",
       "tag": "Hobby · Electronics · Fabrication",
