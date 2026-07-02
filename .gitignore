@@ -1,0 +1,28 @@
+# Source/project files that should never be deployed
+*.pspimage
+*.psd
+*.ai
+*.xcf
+
+# Original high-res images (duplicates of organized gallery files)
+images/eyesDone.png
+images/eyeball paint.png
+images/pumpkin*.png
+images/Pumpkin*.png
+images/PumpkinDoneHalloween.png
+images/runningMan*.png
+images/runningMan*.pspimage
+images/gingerbreads*.png
+images/printers-debackground.png
+images/3dprinter.png
+images/cards*.png
+images/child.png
+images/deco/
+
+# Scraped stock photos (from Crevado, not used)
+images/*.jpg
+images/2206358_preview-1.png
+
+# Future originals (keep web-compressed versions tracked; keep originals local-only)
+images/**/*-original.*
+images/**/*-orig.*

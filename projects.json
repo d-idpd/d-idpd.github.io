@@ -206,8 +206,9 @@
         { "file": "04-feature-test.png",  "caption": "Mechanism test" },
         { "file": "05-3d-features.png",   "caption": "3D printed parts" },
         { "file": "06-papertowel.png",    "caption": "Texture layer" },
-        { "file": "07-primer.png",        "caption": "Primed" },
-        { "file": "08-halloween.png",     "caption": "Halloween night" }
+        { "file": "07-primer.png",                             "caption": "Primed" },
+        { "file": "08-Project management helping out.png",  "caption": "The PM on the job" },
+        { "file": "09-halloween.png",                       "caption": "Halloween night" }
       ]
     }
   ]
