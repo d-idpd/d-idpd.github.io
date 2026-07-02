@@ -10,18 +10,26 @@ images/eyeball paint.png
 images/pumpkin*.png
 images/Pumpkin*.png
 images/PumpkinDoneHalloween.png
-images/runningMan*.png
-images/runningMan*.pspimage
-images/gingerbreads*.png
-images/printers-debackground.png
+images/runningMan1.png
+images/runningMan2.png
+images/runningMan3.png
+images/runningMan3b.pspimage
+images/gingerbreads.png
 images/3dprinter.png
-images/cards*.png
+images/cards.png
 images/child.png
-images/deco/
 
 # Scraped stock photos (from Crevado, not used)
-images/*.jpg
-images/2206358_preview-1.png
+images/10180102_xl-2.jpg
+images/10228822_xxl-4.jpg
+images/13039366_xxl-2.jpg
+images/5280390_enlarged-2.jpg
+images/5280406_xl-1.jpg
+images/5294062_original-2.jpg
+images/5294206_enlarged-4.jpg
+images/5294342_xxl-1.jpg
+images/5298398_original-1.jpg
+images/5371122_original-1.jpg
 
 # Future originals (keep web-compressed versions tracked; keep originals local-only)
 images/**/*-original.*
