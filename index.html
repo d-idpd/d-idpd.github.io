@@ -1269,7 +1269,7 @@
 
       var buyEl = document.getElementById('pg-buy-link');
       if (buyEl) buyEl.innerHTML = proj.buy_link
-        ? '<a href="' + proj.buy_link + '" target="_blank" rel="noopener" class="pg-buy-btn">&#x1F6D2; Purchase</a>'
+        ? '<a href="' + proj.buy_link + '" target="_blank" rel="noopener" class="pg-buy-btn" onclick="gtag(\'event\',\'purchase_click\',{event_category:\'portfolio\',event_label:\'' + (proj.title||'').replace(/'/g,"\\'") + '\'})">&#x1F6D2; Purchase</a>'
         : '';
       document.getElementById('pg-grid-view').style.display = 'none';
       document.getElementById('pg-detail-view').style.display = 'block';
